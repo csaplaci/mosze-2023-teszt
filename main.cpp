@@ -4,23 +4,26 @@ constexpr int N_ELEMENTS = 100;
 
 int main()
 {
-    int *b = new int[NELEMENTS];                    // missing deallocation ("delete") - this may result in memory leak
-    std::cout << '1-100 ertekek duplazasa'          // missing semicolon at the end of command + single quotes instead of double (= string, not char) + endl would be nice
-    for (int i = 0;)                                // rest of the for loop is missing (only init, no condition or increment)
+    int *b = new int[N_ELEMENTS];                           // oops, missed this one ("NELEMENTS" -> "N_ELEMENTS")
+    std::cout << "1-100 ertekek duplazasa" << std::endl;
+    for (int i = 0; i<N_ELEMENTS; i++)
     {
-        b[i] = i * 2;                               // probably meant "b[i] = (i+1) * 2" as this would do 0-99 instead of 1-100
+        b[i] = (i+1) * 2;
     }
-    for (int i = 0; i; i++)                         // checks "i" as bool, probably meant "i<100" instead (as the condition)
+    std::cout << "Ertek:" << std::endl;
+    for (int i = 0; i<N_ELEMENTS; i++)                      // (* "i<100" -> "i<N_ELEMENTS" for the more general code as it was intended)
     {
-        std::cout << "Ertek:"                       // missing semicolon + missing actual values (probably meant "Ertek:" once and only actual values in loop)
-    }    
+        std::cout << b[i] << " ";
+    }
+    std::cout << std::endl;
     std::cout << "Atlag szamitasa: " << std::endl;
-    int atlag;
-    for (int i = 0; i < N_ELEMENTS, i++)            // colon instead of the 2nd semicolon
+    int atlag;                                              // * can remain int (see below)
+    for (int i = 0; i < N_ELEMENTS; i++)
     {
-        atlag += b[i]                               // missing semicolon
+        atlag += b[i];
     }
-    atlag /= N_ELEMENTS;                            // ! atlag is int -> remainder will be lost (if unintentional, try float or double) !
+    delete[] b;
+    atlag /= N_ELEMENTS;                                    // * sorry, just realized that the result will always be int
     std::cout << "Atlag: " << atlag << std::endl;
     return 0;
 }
