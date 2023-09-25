@@ -25,5 +25,6 @@ int main()
     delete[] b;
     atlag /= N_ELEMENTS;                                    // * sorry, just realized that the result will always be int
     std::cout << "Atlag: " << atlag << std::endl;
+    std::cout << "Kiirok valamit " << std::endl;
     return 0;
 }
